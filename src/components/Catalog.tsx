@@ -91,23 +91,33 @@ export default function Catalog() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {items.map((item, i) => (
             <div
               key={i}
-              className="bg-neutral-950 p-4 sm:p-6 flex flex-col justify-between gap-4 hover:bg-neutral-900 transition-colors duration-200 group"
+              className="relative bg-neutral-900 border border-neutral-800 p-5 sm:p-6 flex flex-col gap-5 hover:border-neutral-500 hover:bg-neutral-800 transition-all duration-300 group overflow-hidden"
             >
-              <div>
-                <p className="text-neutral-500 text-xs uppercase tracking-widest mb-1">{item.desc}</p>
-                <h3 className="text-white text-base sm:text-lg font-semibold leading-tight">{item.name}</h3>
+              <span className="absolute top-4 right-5 text-neutral-700 text-3xl font-black leading-none select-none group-hover:text-neutral-600 transition-colors duration-300">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <div className="flex flex-col gap-1 pr-10">
+                <p className="text-neutral-500 text-[10px] uppercase tracking-widest">{item.desc}</p>
+                <h3 className="text-white text-base sm:text-lg font-bold leading-snug">{item.name}</h3>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-white text-xl sm:text-2xl font-bold">{item.price} ₽</span>
+
+              <div className="h-px bg-neutral-700 group-hover:bg-neutral-500 transition-colors duration-300" />
+
+              <div className="flex items-end justify-between">
+                <div className="flex flex-col">
+                  <span className="text-neutral-500 text-[10px] uppercase tracking-widest mb-0.5">Цена</span>
+                  <span className="text-white text-2xl sm:text-3xl font-black leading-none">{item.price} <span className="text-lg font-bold">₽</span></span>
+                </div>
                 <a
                   href="https://t.me/swwaatteer"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs uppercase tracking-wide text-neutral-400 border border-neutral-700 px-3 py-2 group-hover:border-white group-hover:text-white transition-all duration-200"
+                  className="bg-white text-black text-xs uppercase tracking-wide font-semibold px-4 py-2.5 hover:bg-neutral-200 transition-colors duration-200"
                 >
                   Заказать
                 </a>
