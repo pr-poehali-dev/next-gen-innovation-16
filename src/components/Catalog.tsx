@@ -50,13 +50,21 @@ const pods = [
 
 type Tab = "liquids" | "disposables" | "pods" | "coils" | "cartridges";
 
-const tabs: { id: Tab; label: string }[] = [
-  { id: "liquids", label: "Жижи" },
-  { id: "disposables", label: "Одноразки" },
-  { id: "pods", label: "Поды" },
-  { id: "coils", label: "Испарители" },
-  { id: "cartridges", label: "Картриджи" },
+const tabs: { id: Tab; label: string; emoji: string }[] = [
+  { id: "liquids", label: "Жижи", emoji: "💧" },
+  { id: "disposables", label: "Одноразки", emoji: "⚡" },
+  { id: "pods", label: "Поды", emoji: "🫧" },
+  { id: "coils", label: "Испарители", emoji: "🔥" },
+  { id: "cartridges", label: "Картриджи", emoji: "🔋" },
 ];
+
+const tabIcons: Record<Tab, string> = {
+  liquids: "💧",
+  disposables: "⚡",
+  pods: "🫧",
+  coils: "🔥",
+  cartridges: "🔋",
+};
 
 export default function Catalog() {
   const [tab, setTab] = useState<Tab>("liquids");
@@ -86,7 +94,7 @@ export default function Catalog() {
                   : "bg-transparent text-white border-neutral-700 hover:border-white"
               }`}
             >
-              {t.label}
+              <span className="mr-1.5">{t.emoji}</span>{t.label}
             </button>
           ))}
         </div>
@@ -102,7 +110,10 @@ export default function Catalog() {
               </span>
 
               <div className="flex flex-col gap-1 pr-10">
-                <p className="text-neutral-500 text-[10px] uppercase tracking-widest">{item.desc}</p>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xl">{tabIcons[tab]}</span>
+                  <p className="text-neutral-500 text-[10px] uppercase tracking-widest">{item.desc}</p>
+                </div>
                 <h3 className="text-white text-base sm:text-lg font-bold leading-snug">{item.name}</h3>
               </div>
 
