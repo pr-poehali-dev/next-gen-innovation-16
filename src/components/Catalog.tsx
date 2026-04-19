@@ -30,11 +30,17 @@ const disposables = [
   { name: "Рик и Морти (замерзон)", desc: "20 000 тяг", price: 1500 },
 ];
 
-type Tab = "liquids" | "disposables";
+const pods = [
+  { name: "Vaporesso Xros 5 Mini", desc: "Под-система", price: 1900 },
+  { name: "Aegis Hero 5", desc: "Под-система", price: 3000 },
+  { name: "Vaporesso Xros 5", desc: "Под-система", price: 2650 },
+];
+
+type Tab = "liquids" | "disposables" | "pods";
 
 export default function Catalog() {
   const [tab, setTab] = useState<Tab>("liquids");
-  const items = tab === "liquids" ? liquids : disposables;
+  const items = tab === "liquids" ? liquids : tab === "disposables" ? disposables : pods;
 
   return (
     <section id="catalog" className="bg-neutral-950 py-20 px-6">
@@ -64,6 +70,16 @@ export default function Catalog() {
             }`}
           >
             Одноразки
+          </button>
+          <button
+            onClick={() => setTab("pods")}
+            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
+              tab === "pods"
+                ? "bg-white text-black border-white"
+                : "bg-transparent text-white border-neutral-700 hover:border-white"
+            }`}
+          >
+            Поды
           </button>
         </div>
 
