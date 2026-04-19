@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useCart } from "@/context/CartContext";
 
 const liquids = [
   { name: "Dual Extreme", desc: "50 мг", price: 450 },
@@ -108,9 +107,7 @@ export default function Catalog({ onPromoChange }: { onPromoChange?: (discount: 
   const [promo, setPromo] = useState("");
   const [promoState, setPromoState] = useState<"idle" | "valid" | "invalid">("idle");
   const [sparks, setSparks] = useState<Spark[]>([]);
-  const [addedMap, setAddedMap] = useState<Record<string, boolean>>({});
   const sparkIdRef = useRef(0);
-  const { addItem } = useCart();
 
   const items =
     tab === "liquids" ? liquids
@@ -142,14 +139,6 @@ export default function Catalog({ onPromoChange }: { onPromoChange?: (discount: 
     setSparks((prev) => [...prev, ...newSparks]);
     setTimeout(() => setSparks((prev) => prev.filter((s) => !newSparks.find((n) => n.id === s.id))), 700);
   }, []);
-
-  const handleAdd = (item: typeof items[0], e: React.MouseEvent) => {
-    fireSparks(e);
-    addItem({ ...item, category: tab, emoji: tabIcons[tab] });
-    const key = item.name + item.desc;
-    setAddedMap((prev) => ({ ...prev, [key]: true }));
-    setTimeout(() => setAddedMap((prev) => ({ ...prev, [key]: false })), 1200);
-  };
 
   return (
     <>
@@ -186,65 +175,43 @@ export default function Catalog({ onPromoChange }: { onPromoChange?: (discount: 
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {items.map((item, i) => {
-              const key = item.name + item.desc;
-              return (
-                <div
-                  key={i}
-                  className="relative bg-neutral-900 border border-neutral-800 p-5 sm:p-6 flex flex-col gap-5 hover:border-neutral-500 hover:bg-neutral-800 transition-all duration-300 group overflow-hidden"
-                >
-                  <span className="absolute top-4 right-5 text-neutral-700 text-3xl font-black leading-none select-none group-hover:text-neutral-600 transition-colors duration-300">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+            {items.map((item, i) => (
+              <div
+                key={i}
+                className="relative bg-neutral-900 border border-neutral-800 p-5 sm:p-6 flex flex-col gap-5 hover:border-neutral-500 hover:bg-neutral-800 transition-all duration-300 group overflow-hidden"
+              >
+                <span className="absolute top-4 right-5 text-neutral-700 text-3xl font-black leading-none select-none group-hover:text-neutral-600 transition-colors duration-300">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
 
-                  <div className="flex flex-col gap-1 pr-10">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xl">{tabIcons[tab]}</span>
-                      <p className="text-neutral-500 text-[10px] uppercase tracking-widest">{item.desc}</p>
-                    </div>
-                    <h3 className="text-white text-base sm:text-lg font-bold leading-snug">{item.name}</h3>
+                <div className="flex flex-col gap-1 pr-10">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">{tabIcons[tab]}</span>
+                    <p className="text-neutral-500 text-[10px] uppercase tracking-widest">{item.desc}</p>
                   </div>
-
-                  <div className="h-px bg-neutral-700 group-hover:bg-neutral-500 transition-colors duration-300" />
-
-                  <div className="flex items-end justify-between">
-                    <div className="flex flex-col">
-                      <span className="text-neutral-500 text-[10px] uppercase tracking-widest mb-0.5">Цена</span>
-                      <span className="text-white text-2xl sm:text-3xl font-black leading-none">{item.price} <span className="text-lg font-bold">₽</span></span>
-                    </div>
-                    <motion.button
-                      whileTap={{ scale: 0.93 }}
-                      onClick={(e) => handleAdd(item, e)}
-                      className="vape-cursor neon-wave bg-white text-black text-xs uppercase tracking-wide font-semibold px-4 py-2.5 hover:bg-neutral-200 transition-colors duration-200 relative"
-                    >
-                      <AnimatePresence mode="wait">
-                        {addedMap[key] ? (
-                          <motion.span
-                            key="added"
-                            initial={{ scale: 0.7, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.7, opacity: 0 }}
-                            className="block"
-                          >
-                            ✓ В корзине
-                          </motion.span>
-                        ) : (
-                          <motion.span
-                            key="order"
-                            initial={{ scale: 0.7, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.7, opacity: 0 }}
-                            className="block"
-                          >
-                            + В корзину
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </motion.button>
-                  </div>
+                  <h3 className="text-white text-base sm:text-lg font-bold leading-snug">{item.name}</h3>
                 </div>
-              );
-            })}
+
+                <div className="h-px bg-neutral-700 group-hover:bg-neutral-500 transition-colors duration-300" />
+
+                <div className="flex items-end justify-between">
+                  <div className="flex flex-col">
+                    <span className="text-neutral-500 text-[10px] uppercase tracking-widest mb-0.5">Цена</span>
+                    <span className="text-white text-2xl sm:text-3xl font-black leading-none">{item.price} <span className="text-lg font-bold">₽</span></span>
+                  </div>
+                  <motion.a
+                    whileTap={{ scale: 0.93 }}
+                    href="https://t.me/swwaatteer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={fireSparks}
+                    className="vape-cursor neon-wave bg-white text-black text-xs uppercase tracking-wide font-semibold px-4 py-2.5 hover:bg-neutral-200 transition-colors duration-200"
+                  >
+                    Заказать
+                  </motion.a>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="mt-8 sm:mt-10 bg-neutral-900 border border-neutral-800 p-5 sm:p-6">
