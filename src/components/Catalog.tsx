@@ -50,6 +50,14 @@ const pods = [
 
 type Tab = "liquids" | "disposables" | "pods" | "coils" | "cartridges";
 
+const tabs: { id: Tab; label: string }[] = [
+  { id: "liquids", label: "Жижи" },
+  { id: "disposables", label: "Одноразки" },
+  { id: "pods", label: "Поды" },
+  { id: "coils", label: "Испарители" },
+  { id: "cartridges", label: "Картриджи" },
+];
+
 export default function Catalog() {
   const [tab, setTab] = useState<Tab>("liquids");
   const items =
@@ -60,83 +68,46 @@ export default function Catalog() {
     : cartridges;
 
   return (
-    <section id="catalog" className="bg-neutral-950 py-20 px-6">
+    <section id="catalog" className="bg-neutral-950 py-12 sm:py-20 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <p className="uppercase text-neutral-500 text-xs tracking-widest mb-4">Ассортимент</p>
-        <h2 className="text-white text-4xl md:text-6xl font-bold tracking-tight mb-10">
+        <h2 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-8 sm:mb-10">
           КАТАЛОГ
         </h2>
 
-        <div className="flex gap-2 mb-10">
-          <button
-            onClick={() => setTab("liquids")}
-            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
-              tab === "liquids"
-                ? "bg-white text-black border-white"
-                : "bg-transparent text-white border-neutral-700 hover:border-white"
-            }`}
-          >
-            Жижи
-          </button>
-          <button
-            onClick={() => setTab("disposables")}
-            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
-              tab === "disposables"
-                ? "bg-white text-black border-white"
-                : "bg-transparent text-white border-neutral-700 hover:border-white"
-            }`}
-          >
-            Одноразки
-          </button>
-          <button
-            onClick={() => setTab("pods")}
-            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
-              tab === "pods"
-                ? "bg-white text-black border-white"
-                : "bg-transparent text-white border-neutral-700 hover:border-white"
-            }`}
-          >
-            Поды
-          </button>
-          <button
-            onClick={() => setTab("coils")}
-            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
-              tab === "coils"
-                ? "bg-white text-black border-white"
-                : "bg-transparent text-white border-neutral-700 hover:border-white"
-            }`}
-          >
-            Испарители
-          </button>
-          <button
-            onClick={() => setTab("cartridges")}
-            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
-              tab === "cartridges"
-                ? "bg-white text-black border-white"
-                : "bg-transparent text-white border-neutral-700 hover:border-white"
-            }`}
-          >
-            Картриджи
-          </button>
+        <div className="flex gap-2 mb-8 sm:mb-10 overflow-x-auto pb-2 scrollbar-none">
+          {tabs.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              className={`px-4 py-2 sm:px-6 uppercase text-xs sm:text-sm tracking-wide border transition-all duration-200 cursor-pointer whitespace-nowrap flex-shrink-0 ${
+                tab === t.id
+                  ? "bg-white text-black border-white"
+                  : "bg-transparent text-white border-neutral-700 hover:border-white"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800">
           {items.map((item, i) => (
             <div
               key={i}
-              className="bg-neutral-950 p-6 flex flex-col justify-between gap-4 hover:bg-neutral-900 transition-colors duration-200 group"
+              className="bg-neutral-950 p-4 sm:p-6 flex flex-col justify-between gap-4 hover:bg-neutral-900 transition-colors duration-200 group"
             >
               <div>
                 <p className="text-neutral-500 text-xs uppercase tracking-widest mb-1">{item.desc}</p>
-                <h3 className="text-white text-lg font-semibold leading-tight">{item.name}</h3>
+                <h3 className="text-white text-base sm:text-lg font-semibold leading-tight">{item.name}</h3>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-white text-2xl font-bold">{item.price} ₽</span>
+                <span className="text-white text-xl sm:text-2xl font-bold">{item.price} ₽</span>
                 <a
                   href="https://t.me/swwaatteer"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs uppercase tracking-wide text-neutral-400 border border-neutral-700 px-3 py-1.5 group-hover:border-white group-hover:text-white transition-all duration-200"
+                  className="text-xs uppercase tracking-wide text-neutral-400 border border-neutral-700 px-3 py-2 group-hover:border-white group-hover:text-white transition-all duration-200"
                 >
                   Заказать
                 </a>
@@ -145,14 +116,14 @@ export default function Catalog() {
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-8 sm:mt-10 text-center">
           <p className="text-neutral-500 text-sm mb-4">Вопросы по наличию и заказу — пишите в Telegram</p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
             <a
               href="https://t.me/swwaatteer"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-black px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-200 transition-colors duration-200"
+              className="bg-white text-black px-6 sm:px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-200 transition-colors duration-200 text-center"
             >
               @swwaatteer
             </a>
@@ -160,7 +131,7 @@ export default function Catalog() {
               href="https://t.me/Pabl0_Eskabar"
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white text-white px-8 py-3 uppercase text-sm tracking-wide hover:bg-white hover:text-black transition-colors duration-200"
+              className="border border-white text-white px-6 sm:px-8 py-3 uppercase text-sm tracking-wide hover:bg-white hover:text-black transition-colors duration-200 text-center"
             >
               @Pabl0_Eskabar
             </a>

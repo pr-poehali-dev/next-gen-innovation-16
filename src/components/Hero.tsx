@@ -26,18 +26,18 @@ export default function Hero() {
         <div className="absolute inset-0 bg-black/40" />
       </motion.div>
 
-      <div className="relative z-10 text-center text-white">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+      <div className="relative z-10 text-center text-white px-4">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 sm:mb-6">
           VALENTINO<br/>VAPE SHOP
         </h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto px-6 opacity-90 mb-8">
+        <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto px-2 sm:px-6 opacity-90 mb-6 sm:mb-8">
           Лучшие устройства и жидкости. Быстрая доставка. Поддержка 24/7 в Telegram.
         </p>
         <a
           href="https://t.me/swwaatteer"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-white text-black px-8 py-3 uppercase text-sm tracking-wide font-medium hover:bg-neutral-200 transition-colors duration-300"
+          className="inline-block bg-white text-black px-6 sm:px-8 py-3 uppercase text-sm tracking-wide font-medium hover:bg-neutral-200 transition-colors duration-300"
         >
           Написать в Telegram
         </a>

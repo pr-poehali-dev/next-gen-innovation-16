@@ -26,11 +26,11 @@ export default function Promo() {
         </motion.div>
       </div>
 
-      <h3 className="absolute top-12 right-6 text-white uppercase z-10 text-sm md:text-base lg:text-lg">
+      <h3 className="absolute top-4 right-4 sm:top-8 sm:right-6 md:top-12 text-white uppercase z-10 text-xs sm:text-sm md:text-base lg:text-lg">
         Поддержка 24/7
       </h3>
 
-      <p className="absolute bottom-12 right-6 text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-5xl z-10">
+      <p className="absolute bottom-4 right-4 sm:bottom-8 sm:right-6 md:bottom-12 text-white text-base sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl max-w-[85vw] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-5xl z-10">
         Есть вопрос по заказу или выбору устройства? Пиши нам в Telegram — ответим быстро и поможем с выбором.
       </p>
     </div>
