@@ -30,22 +30,9 @@ const disposables = [
   { name: "Рик и Морти (замерзон)", desc: "20 000 тяг", price: 1500 },
 ];
 
-const cartridges = [
-  { name: "Vaporesso Xros Pro Pod", desc: "2 мл · 0.8 Ом", price: 350 },
-  { name: "Vaporesso Xros 3 Nano Pod", desc: "2 мл · 1.2 Ом", price: 320 },
-  { name: "Smoant Pasito Pod", desc: "3 мл · 0.6 Ом", price: 380 },
-  { name: "Lost Vape Orion Pod", desc: "2 мл · 0.25 Ом", price: 420 },
-  { name: "Uwell Caliburn G2 Pod", desc: "2 мл · 0.8 Ом", price: 360 },
-  { name: "Geek Vape Wenax H1 Pod", desc: "2.5 мл · 0.6 Ом", price: 340 },
-];
-
 const coils = [
-  { name: "Vaporesso GTX Mesh", desc: "0.2 Ом · 40–80W", price: 450 },
-  { name: "Smok V9 Max Mesh", desc: "0.15 Ом · 60–90W", price: 480 },
-  { name: "Geek Vape Z Mesh", desc: "0.2 Ом · 40–80W", price: 460 },
-  { name: "Uwell Crown 5 UN2", desc: "0.23 Ом · 40–60W", price: 490 },
-  { name: "Freemax Mesh Pro 2", desc: "0.2 Ом · 40–80W", price: 520 },
-  { name: "Voopoo PnP-VM6", desc: "0.15 Ом · 60–80W", price: 440 },
+  { name: "HERO", desc: "0.2 Ом · 50–58W", price: 460 },
+  { name: "HERO", desc: "0.3 Ом · 30–38W", price: 460 },
 ];
 
 const pods = [
@@ -54,7 +41,7 @@ const pods = [
   { name: "Vaporesso Xros 5", desc: "Под-система", price: 2650 },
 ];
 
-type Tab = "liquids" | "disposables" | "pods" | "cartridges" | "coils";
+type Tab = "liquids" | "disposables" | "pods" | "coils";
 
 export default function Catalog() {
   const [tab, setTab] = useState<Tab>("liquids");
@@ -62,7 +49,6 @@ export default function Catalog() {
     tab === "liquids" ? liquids
     : tab === "disposables" ? disposables
     : tab === "pods" ? pods
-    : tab === "cartridges" ? cartridges
     : coils;
 
   return (
@@ -103,16 +89,6 @@ export default function Catalog() {
             }`}
           >
             Поды
-          </button>
-          <button
-            onClick={() => setTab("cartridges")}
-            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
-              tab === "cartridges"
-                ? "bg-white text-black border-white"
-                : "bg-transparent text-white border-neutral-700 hover:border-white"
-            }`}
-          >
-            Картриджи
           </button>
           <button
             onClick={() => setTab("coils")}
