@@ -31,8 +31,15 @@ const disposables = [
 ];
 
 const coils = [
-  { name: "HERO", desc: "0.2 Ом · 50–58W", price: 460 },
-  { name: "HERO", desc: "0.3 Ом · 30–38W", price: 460 },
+  { name: "HERO", desc: "0.2 Ом · 50–58W", price: 350 },
+  { name: "HERO", desc: "0.3 Ом · 30–38W", price: 350 },
+  { name: "HERO", desc: "0.4 Ом · 25–35W", price: 350 },
+];
+
+const cartridges = [
+  { name: "Aegis Hero (без испарителя)", desc: "Картридж", price: 500 },
+  { name: "Vaporesso", desc: "0.6 Ом", price: 350 },
+  { name: "Vaporesso", desc: "0.4 Ом", price: 350 },
 ];
 
 const pods = [
@@ -41,7 +48,7 @@ const pods = [
   { name: "Vaporesso Xros 5", desc: "Под-система", price: 2650 },
 ];
 
-type Tab = "liquids" | "disposables" | "pods" | "coils";
+type Tab = "liquids" | "disposables" | "pods" | "coils" | "cartridges";
 
 export default function Catalog() {
   const [tab, setTab] = useState<Tab>("liquids");
@@ -49,7 +56,8 @@ export default function Catalog() {
     tab === "liquids" ? liquids
     : tab === "disposables" ? disposables
     : tab === "pods" ? pods
-    : coils;
+    : tab === "coils" ? coils
+    : cartridges;
 
   return (
     <section id="catalog" className="bg-neutral-950 py-20 px-6">
@@ -99,6 +107,16 @@ export default function Catalog() {
             }`}
           >
             Испарители
+          </button>
+          <button
+            onClick={() => setTab("cartridges")}
+            className={`px-6 py-2 uppercase text-sm tracking-wide border transition-all duration-200 cursor-pointer ${
+              tab === "cartridges"
+                ? "bg-white text-black border-white"
+                : "bg-transparent text-white border-neutral-700 hover:border-white"
+            }`}
+          >
+            Картриджи
           </button>
         </div>
 
