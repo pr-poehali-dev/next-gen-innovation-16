@@ -27,8 +27,8 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 text-center text-white">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
-          VAPE SHOP
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+          VALENTINO<br/>VAPE SHOP
         </h1>
         <p className="text-lg md:text-xl max-w-2xl mx-auto px-6 opacity-90 mb-8">
           Лучшие устройства и жидкости. Быстрая доставка. Поддержка 24/7 в Telegram.
